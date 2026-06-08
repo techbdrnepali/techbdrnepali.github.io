@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Portfolio</title>
+
+<style>
+:root{
+    --bg:#0f172a;
+    --card:rgba(255,255,255,0.08);
+    --text:#fff;
+    --accent:#38bdf8;
+    --glass:blur(12px);
+}
+
+.light{
+    --bg:#f1f5f9;
+    --card:rgba(255,255,255,0.7);
+    --text:#111827;
+    --accent:#0284c7;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:Segoe UI,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    transition:.4s;
+}
+
+header{
+    position:fixed;
+    width:100%;
+    top:0;
+    z-index:1000;
+    backdrop-filter:blur(10px);
+    background:rgba(0,0,0,0.2);
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:1rem 8%;
+}
+
+.logo{
+    font-size:1.6rem;
+    font-weight:bold;
+    color:var(--accent);
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:25px;
+}
+
+nav a{
+    text-decoration:none;
+    color:var(--text);
+    transition:.3s;
+}
+
+nav a:hover{
+    color:var(--accent);
+}
+
+.toggle{
+    cursor:pointer;
+    border:none;
+    padding:10px 15px;
+    border-radius:30px;
+    background:var(--accent);
+    color:white;
+}
+
+section{
+    min-height:100vh;
+    padding:120px 10%;
+}
+
+.hero{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:4rem;
+    margin-bottom:15px;
+}
+
+.hero-text span{
+    color:var(--accent);
+}
+
+.hero-text p{
+    font-size:1.1rem;
+    margin-bottom:25px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 25px;
+    background:var(--accent);
+    color:white;
+    text-decoration:none;
+    border-radius:30px;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.hero-img{
+    flex:1;
+    text-align:center;
+}
+
+.hero-img img{
+    width:320px;
+    border-radius:50%;
+    border:5px solid var(--accent);
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    50%{transform:translateY(-15px);}
+}
+
+.glass{
+    background:var(--card);
+    backdrop-filter:var(--glass);
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:20px;
+    padding:25px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:40px;
+    color:var(--accent);
+}
+
+.skills{
+    display:grid;
+    gap:20px;
+}
+
+.skill{
+    margin-bottom:15px;
+}
+
+.skill-name{
+    margin-bottom:8px;
+}
+
+.bar{
+    height:12px;
+    background:#334155;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress{
+    height:100%;
+    background:var(--accent);
+    width:0;
+    transition:2s;
+}
+
+.projects{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+}
+
+.project{
+    cursor:pointer;
+    transition:.4s;
+}
+
+.project:hover{
+    transform:translateY(-10px) scale(1.03);
+}
+
+.project img{
+    width:100%;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.contact{
+    text-align:center;
+}
+
+.contact input,
+.contact textarea{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:10px;
+}
+
+.contact button{
+    border:none;
+}
+
+footer{
+    text-align:center;
+    padding:20px;
+}
+
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+@media(max-width:768px){
+
+.hero{
+    text-align:center;
+    gap:40px;
+}
+
+.hero-text h1{
+    font-size:2.5rem;
+}
+
+nav ul{
+    display:none;
+}
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+<div class="logo">Portfolio</div>
+
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+<button class="toggle" id="themeBtn">🌙</button>
+</nav>
+</header>
+
+<section class="hero" id="home">
+<div class="hero-text">
+<h1>Hello, I'm <span>Alex</span></h1>
+<p>Creative Web Developer building beautiful and interactive experiences.</p>
+<a href="#projects" class="btn">View Work</a>
+</div>
+
+<div class="hero-img">
+<img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500" alt="">
+</div>
+</section>
+
+<section id="about" class="reveal">
+<div class="glass">
+<h2>About Me</h2>
+<p>
+I am a passionate frontend developer specializing in modern web technologies.
+I enjoy creating interactive user experiences, responsive websites, and engaging interfaces.
+</p>
+</div>
+</section>
+
+<section id="skills" class="reveal">
+<div class="glass">
+<h2>Skills</h2>
+
+<div class="skills">
+
+<div class="skill">
+<div class="skill-name">HTML</div>
+<div class="bar"><div class="progress" data-width="95%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-name">CSS</div>
+<div class="bar"><div class="progress" data-width="90%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-name">JavaScript</div>
+<div class="bar"><div class="progress" data-width="85%"></div></div>
+</div>
+
+<div class="skill">
+<div class="skill-name">React</div>
+<div class="bar"><div class="progress" data-width="80%"></div></div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="projects" class="reveal">
+<h2>Projects</h2>
+
+<div class="projects">
+
+<div class="project glass">
+<img src="https://picsum.photos/500/300?1">
+<h3>E-Commerce Website</h3>
+<p>Modern online shopping platform.</p>
+</div>
+
+<div class="project glass">
+<img src="https://picsum.photos/500/300?2">
+<h3>Portfolio Design</h3>
+<p>Responsive and animated portfolio.</p>
+</div>
+
+<div class="project glass">
+<img src="https://picsum.photos/500/300?3">
+<h3>Dashboard UI</h3>
+<p>Interactive analytics dashboard.</p>
+</div>
+
+</div>
+</section>
+
+<section id="contact" class="reveal">
+<div class="glass contact">
+<h2>Contact Me</h2>
+
+<input type="text" placeholder="Your Name">
+<input type="email" placeholder="Your Email">
+<textarea rows="5" placeholder="Your Message"></textarea>
+
+<button class="btn">Send Message</button>
+</div>
+</section>
+
+<footer>
+<p>© 2025 Your Portfolio. All Rights Reserved.</p>
+</footer>
+
+<script>
+// Theme Toggle
+const themeBtn = document.getElementById("themeBtn");
+
+themeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+
+    themeBtn.textContent =
+        document.body.classList.contains("light")
+        ? "☀️"
+        : "🌙";
+});
+
+// Scroll Reveal
+const reveals = document.querySelectorAll(".reveal");
+
+function revealSections(){
+    reveals.forEach(sec=>{
+        const top = sec.getBoundingClientRect().top;
+        if(top < window.innerHeight - 100){
+            sec.classList.add("active");
+        }
+    });
+}
+
+window.addEventListener("scroll", revealSections);
+revealSections();
+
+// Skill Animation
+const observer = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.querySelectorAll(".progress").forEach(bar=>{
+                bar.style.width = bar.dataset.width;
+            });
+        }
+    });
+});
+
+document.querySelectorAll("#skills").forEach(section=>{
+    observer.observe(section);
+});
+
+// Interactive Project Cards
+document.querySelectorAll(".project").forEach(card=>{
+    card.addEventListener("click",()=>{
+        card.style.transform = "scale(1.08)";
+        setTimeout(()=>{
+            card.style.transform = "";
+        },300);
+    });
+});
+
+// Mouse Glow Effect
+document.addEventListener("mousemove",(e)=>{
+    document.body.style.background =
+    `radial-gradient(circle at ${e.clientX}px ${e.clientY}px,
+    rgba(56,189,248,0.15), var(--bg) 35%)`;
+});
+</script>
+
+</body>
+</html>
