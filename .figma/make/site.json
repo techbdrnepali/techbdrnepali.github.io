@@ -1,0 +1,10 @@
+{
+  "description": "Multi-channel AI-assisted customer support platform enabling business admins, supervisors, and agents to manage communications and teams efficiently.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
